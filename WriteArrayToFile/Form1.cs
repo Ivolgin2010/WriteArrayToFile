@@ -15,16 +15,11 @@ namespace WriteArrayToFile
         // сохраняем данные в файл
         private void BtnSave_Click(object sender, EventArgs e)
         {
-
-            string fileTest = @" C:\Users\i.geraskin\source\repos\CalcData.csv";
-
-
-
             //Объявляем приложение
             Excel.Application ex = new Microsoft.Office.Interop.Excel.Application
             {
                 //Отобразить Excel
-                Visible = true,
+                Visible = false,
 
                 //Количество листов в рабочей книге
                 SheetsInNewWorkbook = 2
@@ -43,48 +38,67 @@ namespace WriteArrayToFile
             sheet.Name = "Данные";
 
             //Пример заполнения ячеек
-            for (int i = 1; i <= 10; i++)
+
+            int.TryParse(textBox1.Text, out int TextBox1);
+
+            // заполняем первый столбец
+            for (int i = 1; i <= TextBox1; i++)
             {
-                sheet.Cells[i, 1] = String.Format("Value {0}", i);
+                //sheet.Cells[i, 1] = String.Format("Value {0}", i);
+                sheet.Cells[i, 1] = string.Format("{0}",i);
             }
 
+            // заполняем второй столбец
             for (int i = 1; i <= 10; i++)
             {
-                sheet.Cells[i, 2] = String.Format("Value {0}", i);
+                sheet.Cells[i, 2] = string.Format("{0}", i);
             }
 
+            // заполняем третий столбец
             for (int i = 1; i <= 10; i++)
             {
-                sheet.Cells[i, 3] = String.Format("Value {0}", i);
+                sheet.Cells[i, 3] = string.Format("{0}", i);
             }
 
+            // заполняем четвертый столбец
             for (int i = 1; i <= 10; i++)
             {
-                sheet.Cells[i, 4] = String.Format("Value {0}", i);
+                sheet.Cells[i, 4] = string.Format("{0}", i);
             }
 
+            // заполняем пятый столбец
             for (int i = 1; i <= 10; i++)
             {
-                sheet.Cells[i, 5] = String.Format("Value {0}", i);
+                sheet.Cells[i, 5] = string.Format("{0}", i);
             }
 
             // добавляем пустую строку
             Excel.Range cellRange = (Excel.Range)sheet.Cells[1, 1];
+
             Excel.Range rowRange = cellRange.EntireRow;
+
             rowRange.Insert(Excel.XlInsertShiftDirection.xlShiftDown, false);
 
             // создаем заголовки
-            sheet.Cells[1, 1] = String.Format("Depth");
-            sheet.Cells[1, 2] = String.Format("Paraffins");
-            sheet.Cells[1, 3] = String.Format("Nom. debit");
-            sheet.Cells[1, 4] = String.Format("Temp_oil");
-            sheet.Cells[1, 5] = String.Format("Temp_wire");
+            sheet.Cells[1, 1] = string.Format("Depth");
+            sheet.Cells[1, 2] = string.Format("Paraffins");
+            sheet.Cells[1, 3] = string.Format("Nom. debit");
+            sheet.Cells[1, 4] = string.Format("Temp_oil");
+            sheet.Cells[1, 5] = string.Format("Temp_wire");           
 
-            MessageBox.Show("Данные сохранены", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            // сохраняем данные
+            string fileTest = @"C:\Users\i.geraskin\source\repos\CalcData.csv";
             sheet.SaveAs(fileTest);
 
+            // закрываем рабочую книгу
+            workBook.Close();
 
+            // закрываем приложение
+            ex.Quit();
+
+
+
+            //******************************************************************************************
             //Excel.Application oApp;
             //Excel.Application oSheet;
             //Excel.Application oBook;
@@ -142,12 +156,14 @@ namespace WriteArrayToFile
             //    //    for (int i = 0; i < TextBox1; i++)
             //    //    {
             //    //        // записываем данные в файл
-            //    //        sw.WriteLine(i);                
+            //    //        sw.WriteLine(i); 
+            //*****************************************************************************************************************
 
+
+
+            // выводим сообщение что все ок
             MessageBox.Show("Данные успешно сохранены", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        
+        }        
 
         // закрываем окно
         private void BtnClose_Click(object sender, EventArgs e)
