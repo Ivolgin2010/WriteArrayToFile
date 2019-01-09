@@ -82,12 +82,15 @@ namespace WriteArrayToFile
             // создаем заголовки
             sheet.Cells[1, 1] = string.Format("Depth");
             sheet.Cells[1, 2] = string.Format("Paraffins");
-            sheet.Cells[1, 3] = string.Format("Nom. debit");
+            sheet.Cells[1, 3] = string.Format("Nom_debit");
             sheet.Cells[1, 4] = string.Format("Temp_oil");
             sheet.Cells[1, 5] = string.Format("Temp_wire");           
 
             // сохраняем данные
+            // задаем путь к файлу
             string fileTest = @"C:\Users\i.geraskin\source\repos\CalcData.csv";
+
+            // сохраняем данные
             sheet.SaveAs(fileTest);
 
             // закрываем рабочую книгу
